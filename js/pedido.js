@@ -7,10 +7,10 @@ function incluiProdutoPedido(e){
     const indice = select.selectedIndex
     const nomeProd = select.options[indice].text
     const valorProd = Number(select.value)
-    let prod = {produto: nomeProd, valor: valorProd}
+    const prod = {produto: nomeProd, valor: valorProd}
     produtos.push(prod)
-    console.log(produtos)
-    soma(e)
+    //console.log(produtos)
+    //soma(e)
 }
 document.getElementById("btnIncluirProd").addEventListener('click', incluiProdutoPedido)
 
@@ -77,6 +77,20 @@ async function lista(){
         <option value="${produto.data().preco}">${produto.data().nome} - R$ ${produto.data().preco}</option>
         `
         document.getElementById('selectProduto').innerHTML += html
+    });
+    
+    const ped = await db.collection('pedidos')
+    const dadosPed = await ped.get()
+    dadosPed.forEach(pedido => { 
+    let html = `
+    <th scope="row">${pedido.data().id}</th>
+        <td>${pedido.data().data}</td>
+        <td>${pedido.data().cliente}</td>
+        <td>R$ ${pedido.data().valor}</td>
+        <td><button class="btn btn-danger">Excluir</button></td>
+    </tr>
+  `      
+        document.getElementById('pedidoCads').innerHTML += html
     });
 }
 

@@ -29,7 +29,7 @@
                     <a class="nav-link" href="./produtos.html">Produtos</a>
                   </li>
                  <li class="nav-item">
-                    <a class="nav-link disabled" href="./pedidos.html">Pedidos</a>
+                  <a class="nav-link" href="./pedidos.html">Pedidos</a>
                   </li>
                 </ul>
               </div>
@@ -39,15 +39,15 @@
 
     <main>
         <div class="container">
-            <h2>Pedidos</h2>
+            <h2>Cadastrar Pedidos</h2>
             <hr>
             <form>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="produto">Pedido</label>
                   <input type="text" class="form-control" id="pedido" placeholder="Numero do Pedido" readonly>
-                </div>
+                </div> -->
                 <div class="form-group">
-                  <label for="data">Data do pedido</label>
+                  <label for="data">Data do Pedido</label>
                   <input type="date" class="form-control" id="data" >
                 </div>
                 <div class="form-group">
@@ -72,13 +72,14 @@
               </form>
               <hr>
               <h2>Pedidos Cadastrados</h2>
-              <table class="table table-hover">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">Código</th>
               <th scope="col">Data</th>
               <th scope="col">Cliente</th>
               <th scope="col">Total Pedido</th>
+              <th scope="col">Ação</th>
             </tr>
           </thead>
           <tbody id="pedidoCads">

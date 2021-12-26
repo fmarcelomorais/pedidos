@@ -1,5 +1,6 @@
 
-    const firebaseConfig = {
+   (function(){
+     const firebaseConfig = {
       apiKey: "AIzaSyCPD19C98vGIgDcn58p_T4VVZASpjosjjs",
       authDomain: "pedidos-cacca.firebaseapp.com",
       projectId: "pedidos-cacca",
@@ -9,7 +10,24 @@
     };
   
      firebase.initializeApp(firebaseConfig);
-
+  })()
+     
+     async function pedidos(){
+       const db = firebase.firestore()
+       const ped = await db.collection('pedidos')
+       const dadosPed = await ped.get()
+       dadosPed.forEach(pedido => { 
+       let html = `
+       <th scope="row">${pedido.data().id}</th>
+           <td>${pedido.data().data}</td>
+           <td>${pedido.data().cliente}</td>
+           <td>R$ ${pedido.data().valor}</td>
+           <td><button class="btn btn-danger">Excluir</button></td>
+       </tr>
+     `      
+           document.getElementById('pedidoCads').innerHTML += html
+       });
+     }
 
 
 
