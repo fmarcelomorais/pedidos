@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
 </head>
-  <body > 
+  <body onload="lista()"> 
     <header>
         <div class="container-fluid">
           <nav class="navbar navbar-dark bg-info shadow-sm mt-1">
@@ -39,31 +39,49 @@
 
     <main>
         <div class="container">
-            <h2>Produtos</h2>
+            <h2>Pedidos</h2>
             <hr>
             <form>
                 <div class="form-group">
-                  <label for="produto">Produto</label>
-                  <input type="text" class="form-control" id="produto" placeholder="Nome do Produto">
+                  <label for="produto">Pedido</label>
+                  <input type="text" class="form-control" id="pedido" placeholder="Numero do Pedido" readonly>
                 </div>
                 <div class="form-group">
-                  <label for="preco">Preço</label>
-                  <input type="text" class="form-control" id="preco" placeholder="R$ 15.99">
+                  <label for="data">Data do pedido</label>
+                  <input type="date" class="form-control" id="data" >
                 </div>
-                <button class="btn btn-primary" id="btnProduto">Cadastrar</button>
+                <div class="form-group">
+                  <label for="selectCliente">Cliente</label>
+                  <select name="selectCliente" class="form-control" id="selectCliente">
+                    <option selected>Selecione o Cliente</option>
+                  </select>
+                </div>
+                <fieldset>
+                  <legend>Selecione os produtos</legend>
+                  <div class="form-group">
+                    <label for="selectProduto">Produto</label>
+                    <select name="selectProduto" class="form-control" id="selectProduto">
+                      <option selected>Selecione o Produto</option>
+                    </select>
+                  </div>
+                  <button class="btn btn-primary mt-1" id="btnIncluirProd">Incluir Produto</button>
+                  <button class="btn btn-danger mt-1" id="btnExcluirProd">Excluir Produto</button>
+                </fieldset>
+              <hr>
+                <button class="btn btn-success mt-3" id="btnCadPedido">Cadastrar Pedido</button>
               </form>
               <hr>
-              <h2>Produtos Cadastrados</h2>
+              <h2>Pedidos Cadastrados</h2>
               <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">Código</th>
-              <th scope="col">Produto</th>
-              <th scope="col">Valor</th>
-              <th scope="col">Ação</th>
+              <th scope="col">Data</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Total Pedido</th>
             </tr>
           </thead>
-          <tbody id="prodCads">
+          <tbody id="pedidoCads">
            <!-- <tr>
               <th scope="row">1</th>
               <td>Marcelo</td>
@@ -109,6 +127,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="./js/firebase.js"></script>
-    <script src="./js/produto.js"></script> 
+    <script src="./js/pedido.js"></script> 
 </body>
 </html>
