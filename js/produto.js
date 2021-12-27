@@ -3,25 +3,29 @@ let db = firebase.firestore()
 
 async function cadastrarProduto(e){
     e.preventDefault();
-
-    let id = Math.abs(Math.round(Math.random() * (1 - 1000)))
     const $produto = document.getElementById("produto").value
     const $preco = document.getElementById("preco").value
+    if($produto == '' && $preco == ''){
+        alert('Nenhum Produto e preço foi informado')
+    }else{
 
-    const produto = {
-        id: id,
-        nome: $produto,
-        preco: $preco
+        let id = Math.abs(Math.round(Math.random() * (1 - 1000)))
+        const produto = {
+            id: id,
+            nome: $produto,
+            preco: $preco
+        }
+    
+        try {
+            await db.collection('produtos').doc('produto'+ id).set(produto)
+            alert('Produto salvo com sucesso')
+            document.getElementById("produto").value = ""
+            document.getElementById("preco").value = ""
+        }catch (error) {
+            console.log(error)
+        }
     }
 
-    try {
-        await db.collection('produtos').doc('produto'+ id).set(produto)
-        alert('Produto salvo com sucesso')
-        document.getElementById("produto").value = ""
-        document.getElementById("preco").value = ""
-    }catch (error) {
-        console.log(error)
-    }
 }   
 
 async function prodCads(){
@@ -35,7 +39,7 @@ async function prodCads(){
         <td>${produto.data().nome}</td>
         <td>${produto.data().preco}</td>
         <td>
-        <button type="button" class="btn btn-warning" id="altera${produto.data().id}" onclick="alterar(${produto.data().id})">Editar</button>
+        <button type="button" class="btn btn-warning m-1" id="altera${produto.data().id}" onclick="alterar(${produto.data().id})">Editar</button>
         <button type="button" class="btn btn-danger" onclick="excluir(${produto.data().id})">Excluir</button>
         </td>
       </tr>

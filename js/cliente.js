@@ -42,7 +42,7 @@ async function cliCads(){
         <td id="tdNome">${cliente.data().nome}</td>
         <td id="tdTelefone">${cliente.data().telefone}</td>
         <td>
-        <button type="button" class="btn btn-warning" id="altera${cliente.data().id}" onclick="alterar(${cliente.data().id})">Editar</button>
+        <button type="button" class="btn btn-warning  m-1" id="altera${cliente.data().id}" onclick="alterar(${cliente.data().id})">Editar</button>
         <button type="button" class="btn btn-danger" onclick="excluir(${cliente.data().id})">Excluir</button>
         </td>
       </tr>

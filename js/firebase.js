@@ -25,7 +25,7 @@
          <td>${pedido.data().cliente}</td>
          <td>R$ ${pedido.data().valor}</td>
          <td><button class="btn btn-primary m-1" hidden>Produtos</button>
-         <button class="btn btn-danger">Excluir</button></td>
+         <button class="btn btn-danger" hidden>Excluir</button></td>
          </tr>
          `      
          document.getElementById('pedidoCads').innerHTML += html
