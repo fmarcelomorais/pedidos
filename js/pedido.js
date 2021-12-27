@@ -87,10 +87,22 @@ async function lista(){
         <td>${pedido.data().data}</td>
         <td>${pedido.data().cliente}</td>
         <td>R$ ${pedido.data().valor}</td>
-        <td><button class="btn btn-danger">Excluir</button></td>
+        <td><button class="btn btn-danger" onclick="excluir(${pedido.data().id})">Excluir</button></td>
     </tr>
   `      
         document.getElementById('pedidoCads').innerHTML += html
     });
 }
+
+
+
+async function excluir(id){
+    try {
+        await db.collection('pedidos').doc('pedido'+id).delete()
+        alert('Pedido Excluido')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 

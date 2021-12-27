@@ -16,16 +16,20 @@
        const db = firebase.firestore()
        const ped = await db.collection('pedidos')
        const dadosPed = await ped.get()
+
        dadosPed.forEach(pedido => { 
-       let html = `
-       <th scope="row">${pedido.data().id}</th>
-           <td>${pedido.data().data}</td>
-           <td>${pedido.data().cliente}</td>
-           <td>R$ ${pedido.data().valor}</td>
-           <td><button class="btn btn-danger">Excluir</button></td>
-       </tr>
-     `      
-           document.getElementById('pedidoCads').innerHTML += html
+
+         let html = `
+         <th scope="row">${pedido.data().id}</th>
+         <td>${pedido.data().data}</td>
+         <td>${pedido.data().cliente}</td>
+         <td>R$ ${pedido.data().valor}</td>
+         <td><button class="btn btn-primary m-1" hidden>Produtos</button>
+         <button class="btn btn-danger">Excluir</button></td>
+         </tr>
+         `      
+         document.getElementById('pedidoCads').innerHTML += html
+
        });
      }
 
