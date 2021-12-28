@@ -1,4 +1,4 @@
-let db = firebase.firestore()
+//let db = firebase.firestore()
 // Cadastrar Produtos
 
 async function cadastrarProduto(e){
@@ -6,7 +6,7 @@ async function cadastrarProduto(e){
     const $produto = document.getElementById("produto").value
     const $preco = document.getElementById("preco").value
     if($produto == '' && $preco == ''){
-        alert('Nenhum Produto e preço foi informado')
+        swal({text:'Nenhum Produto e preço foi informado',icon: 'warning'})
     }else{
 
         let id = Math.abs(Math.round(Math.random() * (1 - 1000)))
@@ -18,13 +18,15 @@ async function cadastrarProduto(e){
     
         try {
             await db.collection('produtos').doc('produto'+ id).set(produto)
-            alert('Produto salvo com sucesso')
+            swal(`Produto ${id}`, 'Cadastrado com Sucesso', 'success')
             document.getElementById("produto").value = ""
             document.getElementById("preco").value = ""
         }catch (error) {
             console.log(error)
         }
     }
+    window.location.reload()
+    //prodCads()
 
 }   
 
@@ -37,7 +39,7 @@ async function prodCads(){
         <tr>
         <th scope="row">${produto.data().id}</th>
         <td>${produto.data().nome}</td>
-        <td>${produto.data().preco}</td>
+        <td>R$ ${produto.data().preco}</td>
         <td>
         <button type="button" class="btn btn-warning m-1" id="altera${produto.data().id}" onclick="alterar(${produto.data().id})">Editar</button>
         <button type="button" class="btn btn-danger" onclick="excluir(${produto.data().id})">Excluir</button>
@@ -58,7 +60,7 @@ async function alterar(id){
         document.getElementById(`altera${id}`).setAttribute('class', 'btn btn-success')
         document.getElementById(`altera${id}`).setAttribute('onclick', 'salvar()')
         document.getElementById(`altera${id}`).innerHTML = 'Salvar'
-
+        
     } catch (error) {
         console.log(error)
     }
@@ -76,7 +78,7 @@ async function salvar(){
 
     try {
         await db.collection('produtos').doc('produto'+id).set(produto)
-        alert('Dados Alterado com Sucesso')
+        swal(`Produto ${id}`, 'Alterado com Sucesso', 'success')
         document.getElementById("produto").value = ""
         document.getElementById("preco").value = ""
 
@@ -87,6 +89,7 @@ async function salvar(){
     }catch (error) {
         console.log(error)
     }
+    window.location.reload()
 }
 
 
@@ -94,8 +97,9 @@ async function salvar(){
 async function excluir(id){
     try {
         await db.collection('produtos').doc('produto'+id).delete()
-        alert('Produto Excluido')
+        swal(`Produto ${id}`, 'Excluido com Sucesso', 'success')
     } catch (error) {
         console.log(error)
     }
+    window.location.reload()
 }

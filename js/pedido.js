@@ -1,4 +1,4 @@
-let db = firebase.firestore()
+//let db = firebase.firestore()
 
 const produtos = []
 function incluiProdutoPedido(e){
@@ -9,6 +9,7 @@ function incluiProdutoPedido(e){
     const valorProd = Number(select.value)
     const prod = {produto: nomeProd, valor: valorProd}
     produtos.push(prod)
+    swal({text:'Produto inserido no pedido', icon:'success'})
     //console.log(produtos)
     //soma(e)
 }
@@ -51,10 +52,11 @@ async function cadastrarPedido(e){
 
     try {
         await db.collection('pedidos').doc('pedido'+ id).set(pedido)
-        alert('Pedido salvo com sucesso')
+        swal(`Pedido ${id}`,'Salvo com sucesso', 'success')
     }catch (error) {
         console.log(error)
     }
+    window.location.reload()
 }   
 
 document.getElementById("btnCadPedido").addEventListener("click", cadastrarPedido)
@@ -86,7 +88,7 @@ async function lista(){
     <th scope="row">${pedido.data().id}</th>
         <td>${pedido.data().data}</td>
         <td>${pedido.data().cliente}</td>
-        <td>R$ ${pedido.data().valor}</td>
+        <td>R$ ${Number(pedido.data().valor).toFixed(2)}</td>
         <td><button class="btn btn-danger" onclick="excluir(${pedido.data().id})">Excluir</button></td>
     </tr>
   `      
@@ -99,10 +101,11 @@ async function lista(){
 async function excluir(id){
     try {
         await db.collection('pedidos').doc('pedido'+id).delete()
-        alert('Pedido Excluido')
+        swal(`Pedido ${id}`, 'Pedido Excluido', 'warning')
     } catch (error) {
         console.log(error)
     }
+    window.location.reload()
 }
 
 

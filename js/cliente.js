@@ -1,4 +1,4 @@
-const db = firebase.firestore()
+//const db = firebase.firestore()
 
 async function cadastrarCliente(e){
     e.preventDefault();
@@ -6,7 +6,7 @@ async function cadastrarCliente(e){
     const $nome = document.getElementById("cliente").value
     const $telefone = document.getElementById("telefone").value
     if($nome == '' && $telefone == '') {
-        alert('Nome do Cliente é obrigatório')
+        swal({text:'Nome do Cliente é obrigatório', icon:'warning'})
     }else{
 
         let id = Math.abs(Math.round(Math.random() * (1 - 1000)))
@@ -18,13 +18,14 @@ async function cadastrarCliente(e){
     
         try {
             await db.collection('clientes').doc('cliente'+ id).set(cliente)
-            alert('Cliente salvo com sucesso')
+            swal(`Cliente ${id}`, 'Cadastrado com Sucesso', 'success')
             document.getElementById("cliente").value = ""
             document.getElementById("telefone").value = ""
         }catch (error) {
             console.log(error)
         }
     }
+    window.location.reload()
 
 } 
 
@@ -78,7 +79,7 @@ async function salvar(){
 
     try {
         await db.collection('clientes').doc('cliente'+id).set(cliente)
-        alert('Dados Alterado com Sucesso')
+        swal(`Cliente ${id}`, 'Alterado com Sucesso','success')
         document.getElementById("cliente").value = ""
         document.getElementById("telefone").value = ""
 
@@ -89,14 +90,16 @@ async function salvar(){
     }catch (error) {
         console.log(error)
     }
+    window.location.reload()
 }
 
 
 async function excluir(id){
     try {
         await db.collection('clientes').doc('cliente'+id).delete()
-        alert('Cliente Excluido')
+        swal(`Cliente ${id}`, 'Excluido com Sucesso', 'success')
     } catch (error) {
         console.log(error)
     }
+    window.location.reload()
 }
