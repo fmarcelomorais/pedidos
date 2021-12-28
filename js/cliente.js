@@ -19,13 +19,13 @@ async function cadastrarCliente(e){
         try {
             await db.collection('clientes').doc('cliente'+ id).set(cliente)
             swal(`Cliente ${id}`, 'Cadastrado com Sucesso', 'success')
+            window.location.reload()
             document.getElementById("cliente").value = ""
             document.getElementById("telefone").value = ""
         }catch (error) {
             console.log(error)
         }
     }
-    window.location.reload()
 
 } 
 
@@ -82,7 +82,7 @@ async function salvar(){
         swal(`Cliente ${id}`, 'Alterado com Sucesso','success')
         document.getElementById("cliente").value = ""
         document.getElementById("telefone").value = ""
-
+        window.location.reload()
         document.getElementById(`altera${id}`).setAttribute('class', 'btn btn-warning')
         document.getElementById(`altera${id}`).setAttribute('onclick', 'alterar(id)')
         document.getElementById(`altera${id}`).innerHTML = 'Editar'
@@ -90,7 +90,6 @@ async function salvar(){
     }catch (error) {
         console.log(error)
     }
-    window.location.reload()
 }
 
 
@@ -98,8 +97,8 @@ async function excluir(id){
     try {
         await db.collection('clientes').doc('cliente'+id).delete()
         swal(`Cliente ${id}`, 'Excluido com Sucesso', 'success')
+        window.location.reload()
     } catch (error) {
         console.log(error)
     }
-    window.location.reload()
 }

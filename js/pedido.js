@@ -29,6 +29,7 @@ function excluirProdutoPedido(e){
     e.preventDefault();    
     const select = document.getElementById("selectProduto")
     produtos.pop(select.value)
+    swal({text:'Produto Excluido', icon:'success'})
     console.log(produtos)
 }
 document.getElementById("btnExcluirProd").addEventListener('click', excluirProdutoPedido)
@@ -53,10 +54,10 @@ async function cadastrarPedido(e){
     try {
         await db.collection('pedidos').doc('pedido'+ id).set(pedido)
         swal(`Pedido ${id}`,'Salvo com sucesso', 'success')
+        window.location.reload()
     }catch (error) {
         console.log(error)
     }
-    window.location.reload()
 }   
 
 document.getElementById("btnCadPedido").addEventListener("click", cadastrarPedido)
@@ -102,10 +103,10 @@ async function excluir(id){
     try {
         await db.collection('pedidos').doc('pedido'+id).delete()
         swal(`Pedido ${id}`, 'Pedido Excluido', 'warning')
+        window.location.reload()
     } catch (error) {
         console.log(error)
     }
-    window.location.reload()
 }
 
 
