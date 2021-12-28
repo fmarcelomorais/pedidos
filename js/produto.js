@@ -19,12 +19,12 @@ async function cadastrarProduto(e){
         try {
             await db.collection('produtos').doc('produto'+ id).set(produto)
             swal(`Produto ${id}`, 'Cadastrado com Sucesso', 'success')
-            window.location.reload()
             document.getElementById("produto").value = ""
             document.getElementById("preco").value = ""
         }catch (error) {
             console.log(error)
         }
+        //atualiza()
     }
     //prodCads()
 
@@ -81,14 +81,14 @@ async function salvar(){
         swal(`Produto ${id}`, 'Alterado com Sucesso', 'success')
         document.getElementById("produto").value = ""
         document.getElementById("preco").value = ""
-        window.location.reload()
         document.getElementById(`altera${id}`).setAttribute('class', 'btn btn-warning')
         document.getElementById(`altera${id}`).setAttribute('onclick', 'alterar(id)')
         document.getElementById(`altera${id}`).innerHTML = 'Editar'
-
+        
     }catch (error) {
         console.log(error)
     }
+    //atualiza()
     
 }
 
@@ -98,8 +98,9 @@ async function excluir(id){
     try {
         await db.collection('produtos').doc('produto'+id).delete()
         swal(`Produto ${id}`, 'Excluido com Sucesso', 'success')
-        window.location.reload()
+        
     } catch (error) {
         console.log(error)
     }
+    //atualiza()
 }

@@ -54,10 +54,10 @@ async function cadastrarPedido(e){
     try {
         await db.collection('pedidos').doc('pedido'+ id).set(pedido)
         swal(`Pedido ${id}`,'Salvo com sucesso', 'success')
-        window.location.reload()
     }catch (error) {
         console.log(error)
     }
+    //atualiza()
 }   
 
 document.getElementById("btnCadPedido").addEventListener("click", cadastrarPedido)
@@ -103,10 +103,11 @@ async function excluir(id){
     try {
         await db.collection('pedidos').doc('pedido'+id).delete()
         swal(`Pedido ${id}`, 'Pedido Excluido', 'warning')
-        window.location.reload()
+        
     } catch (error) {
         console.log(error)
     }
+    
 }
 
 

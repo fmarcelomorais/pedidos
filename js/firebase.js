@@ -1,5 +1,8 @@
 
-
+  function atualiza(){        
+    window.location.reload()
+    //pedidos()
+  }
    (function(){
      const firebaseConfig = {
       apiKey: "AIzaSyCPD19C98vGIgDcn58p_T4VVZASpjosjjs",
